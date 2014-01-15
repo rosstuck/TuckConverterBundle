@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="test.average.class">TestAverageFakeClass</parameter>
+        <parameter key="test.empty.class">TestEmptyFakeClass</parameter>
+        <parameter key="test.empty.class">TestAnonFakeClass</parameter>
+    </parameters>
+
+    <services>
+        <!-- Couple of params and a tag -->
+        <service id="test.average" class="%test.average.class%">
+            <argument type="service" id="test.loader.factory" />
+            <argument type="service" id="test.dumper.factory" />
+            <tag name="test.faketag" />
+        </service>
+
+        <!-- Empty -->
+        <service id="test.empty" class="%test.empty.class%">
+        </service>
+
+    </services>
+
+</container>

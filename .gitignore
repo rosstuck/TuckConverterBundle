@@ -2,6 +2,7 @@
 app/bootstrap*
 
 # Symfony directories
+.idea
 vendor/*
 */logs/*
 */cache/*

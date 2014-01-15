@@ -1,0 +1,12 @@
+parameters:
+    test.average.class: TestAverageFakeClass
+    test.empty.class: TestAnonFakeClass
+
+services:
+    test.average:
+        class: %test.average.class%
+        tags:
+            - { name: test.faketag }
+        arguments: ['@test.loader.factory', '@test.dumper.factory']
+    test.empty:
+        class: %test.empty.class%

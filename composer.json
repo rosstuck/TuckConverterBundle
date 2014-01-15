@@ -1,0 +1,28 @@
+{
+    "name":        "tuck/converter-bundle",
+    "type":        "symfony-bundle",
+    "description": "Adds a command for converting service container configs to other file formats",
+    "keywords":    ["container", "convert"],
+    "license":     "MIT",
+    "authors": [
+        {
+            "name": "Ross Tuck",
+            "homepage": "http://rosstuck.com"
+        }
+    ],
+    "require": {
+        "php":  ">=5.3.3",
+        "symfony/console": ">=2.3",
+        "symfony/framework-bundle": "~2.3"
+    },
+    "require-dev": {
+        "mockery/mockery": "~0.8",
+        "phpunit/phpunit": "~3.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "Tuck\\ConverterBundle": ""
+        }
+    },
+    "target-dir": "Tuck/ConverterBundle/"
+}
