@@ -4,6 +4,7 @@ namespace Tuck\ConverterBundle\Tests;
 use SplFileInfo;
 use Tuck\ConverterBundle\ConfigFormatConverter;
 use Tuck\ConverterBundle\Dumper\DumperFactory;
+use Tuck\ConverterBundle\File\TempFileFactory;
 use Tuck\ConverterBundle\Loader\LoaderFactory;
 
 class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
@@ -17,7 +18,8 @@ class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
     {
         $this->converter = new ConfigFormatConverter(
             new LoaderFactory(),
-            new DumperFactory()
+            new DumperFactory(),
+            new TempFileFactory()
         );
     }
 
@@ -45,6 +47,22 @@ class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
     public function testInvalidFormatGivesError()
     {
         $this->converter->convertFile($this->loadConfigFileMock('simple.xml'), 'fakeformat');
+    }
+
+    public function testCanConvertString()
+    {
+        $file = $this->loadConfigFileMock('simple.xml');
+
+        $newConfig = $this->converter->convertString(
+            file_get_contents($file->getRealPath()),
+            'xml',
+            'yml'
+        );
+
+        $this->assertStringEqualsFile(
+            $this->loadConfigFileMock('simple.yml')->getRealPath(),
+            $newConfig
+        );
     }
 
     protected function loadConfigFileMock($filename)

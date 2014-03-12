@@ -8,6 +8,7 @@ use Tuck\ConverterBundle\Command\ConvertCommand;
 use Mockery;
 use Tuck\ConverterBundle\ConfigFormatConverter;
 use Tuck\ConverterBundle\Dumper\DumperFactory;
+use Tuck\ConverterBundle\File\TempFileFactory;
 use Tuck\ConverterBundle\Loader\LoaderFactory;
 
 class ConvertCommandTest extends \PHPUnit_Framework_TestCase
@@ -41,7 +42,7 @@ class ConvertCommandTest extends \PHPUnit_Framework_TestCase
         $command = $application->find('container:convert');
 
         // Mock the container with a convertor
-        $converter = new ConfigFormatConverter(new LoaderFactory(), new DumperFactory());
+        $converter = new ConfigFormatConverter(new LoaderFactory(), new DumperFactory(), new TempFileFactory());
         $mockContainer = Mockery::mock('Symfony\Component\DependencyInjection\ContainerInterface');
         $mockContainer->shouldReceive('get')->with('tuck_converter.config_format_converter')->andReturn($converter);
         $command->setContainer($mockContainer);
