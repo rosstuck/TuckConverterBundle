@@ -20,7 +20,6 @@ The actual conversion is based on Symfony's built-in loaders and dumpers, so thi
 
 TODO
 ----
-- Create a version that converts strings as well as files
 - Remove a coupling on input for file extension
 - Update the DependencyInjection/*Extension files as well (perhaps with PHP-Parser?)
 - Moar tests
