@@ -71,7 +71,7 @@ class ConfigFormatConverter
     }
 
     /**
-     * Convert some a config represented as a string to some other format
+     * Convert a config represented as a string to some other format
      *
      * @param string $content
      * @param string $oldFormat
