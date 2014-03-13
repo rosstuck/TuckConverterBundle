@@ -1,7 +1,8 @@
 <?php
 
-namespace Tuck\ConverterBundle\File;
+namespace Tuck\ConverterBundle\Tests\File;
 
+use Tuck\ConverterBundle\File\TempFileFactory;
 
 class TempFileUtilTest extends \PHPUnit_Framework_TestCase
 {
