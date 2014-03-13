@@ -21,7 +21,7 @@ class TempFileUtilTest extends \PHPUnit_Framework_TestCase
         $this->tempFileFactory = new TempFileFactory();
     }
 
-    public function testCreatingATempFileWorks()
+    public function testCreatingTempFileWorks()
     {
         $this->tempFile = $this->tempFileFactory->createFile();
 
@@ -40,6 +40,19 @@ class TempFileUtilTest extends \PHPUnit_Framework_TestCase
         $this->tempFile = $this->tempFileFactory->createFile(null, 'foo');
 
         $this->assertEquals('foo', $this->tempFile->getExtension());
+    }
+
+    /**
+     * @expectedException \Tuck\ConverterBundle\Exception\FileAlreadyExistsException
+     */
+    public function testThrowsExceptionWhenTempFileAlreadyExists()
+    {
+        // This factory always creates the same file name...
+        $factory = new MockTempFileFactory();
+
+        // ...so running it twice here should thrown an exception
+        $this->tempFile = $factory->createFile();
+        $factory->createFile();
     }
 
     protected function tearDown()

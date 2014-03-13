@@ -80,9 +80,11 @@ class ConfigFormatConverter
      */
     public function convertString($content, $oldFormat, $newFormat)
     {
-        return $this->convertFile(
-            $this->tempFileFactory->createFile($content, $oldFormat),
-            $newFormat
-        );
+        $tempFile = $this->tempFileFactory->createFile($content, $oldFormat);
+
+        $output = $this->convertFile($tempFile, $newFormat);
+        unlink($tempFile->getRealPath());
+
+        return $output;
     }
 }

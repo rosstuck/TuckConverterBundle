@@ -3,9 +3,11 @@
 namespace Tuck\ConverterBundle\File;
 
 use Tuck\ConverterBundle\Exception\CouldNotCreateFileException;
+use Tuck\ConverterBundle\Exception\FileAlreadyExistsException;
 
 /**
- *  
+ * Creates temp files with a nice interface
+ *
  * @author Ross Tuck <me@rosstuck.com>
  */
 class TempFileFactory
@@ -25,6 +27,9 @@ class TempFileFactory
     public function createFile($content = null, $extension = 'tmp')
     {
         $filename = $this->generateFilename($extension);
+        if (file_exists($filename)) {
+            throw FileAlreadyExistsException::create($filename);
+        }
 
         $tempFile = new \SplFileObject($filename, 'x+');
         if ($content !== null) {

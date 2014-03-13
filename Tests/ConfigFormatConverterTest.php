@@ -6,6 +6,7 @@ use Tuck\ConverterBundle\ConfigFormatConverter;
 use Tuck\ConverterBundle\Dumper\DumperFactory;
 use Tuck\ConverterBundle\File\TempFileFactory;
 use Tuck\ConverterBundle\Loader\LoaderFactory;
+use Tuck\ConverterBundle\Tests\File\MockTempFileFactory;
 
 class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,6 +14,12 @@ class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
      * @var ConfigFormatConverter
      */
     protected $converter;
+
+    /**
+     * A list of files to be removed during teardown
+     * @var string[]
+     */
+    protected $teardownFiles = array();
 
     public function setup()
     {
@@ -63,6 +70,41 @@ class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
             $this->loadConfigFileMock('simple.yml')->getRealPath(),
             $newConfig
         );
+    }
+
+    /**
+     * When converting a string, we have to use a temp file since the symfony
+     * loaders have that assumption built in. To prevent flooding the tmp dir
+     * of the online converter, we should ensure the file is removed afterwards
+     */
+    public function testTempFileIsCleanedUpAfterConversion()
+    {
+        // Same setup but with a mock temp file factory that shows us the temp file name used
+        $mockTempFileFactory = new MockTempFileFactory();
+        $converter = new ConfigFormatConverter(new LoaderFactory(), new DumperFactory(), $mockTempFileFactory);
+
+        // Make sure the file gets removed, even if the test fails so it doesn't jam the next run
+        $this->teardownFiles[] = $mockTempFileFactory->getMockFilename('xml');
+
+        // Standard string conversion, nothing to note
+        $converter->convertString(
+            file_get_contents($this->loadConfigFileMock('simple.xml')->getRealPath()),
+            'xml',
+            'yml'
+        );
+
+        // Ensure the file is gone
+        $this->assertFileNotExists($mockTempFileFactory->getMockFilename('xml'));
+    }
+
+    protected function tearDown()
+    {
+        foreach ($this->teardownFiles as $file) {
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
+        $this->teardownFiles = array();
     }
 
     protected function loadConfigFileMock($filename)
