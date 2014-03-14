@@ -6,7 +6,7 @@ use Tuck\ConverterBundle\ConfigFormatConverter;
 use Tuck\ConverterBundle\Dumper\StandardDumperFactory;
 use Tuck\ConverterBundle\File\SysTempFileFactory;
 use Tuck\ConverterBundle\Loader\StandardLoaderFactory;
-use Tuck\ConverterBundle\Tests\File\MockSysTempFileFactory;
+use Tuck\ConverterBundle\Tests\File\MockTempFileFactory;
 
 class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
 {
@@ -80,7 +80,7 @@ class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
     public function testTempFileIsCleanedUpAfterConversion()
     {
         // Same setup but with a mock temp file factory that shows us the temp file name used
-        $mockTempFileFactory = new MockSysTempFileFactory();
+        $mockTempFileFactory = new MockTempFileFactory();
         $converter = new ConfigFormatConverter(new StandardLoaderFactory(), new StandardDumperFactory(), $mockTempFileFactory);
 
         // Make sure the file gets removed, even if the test fails so it doesn't jam the next run

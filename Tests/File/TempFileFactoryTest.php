@@ -49,7 +49,7 @@ class TempFileFactoryTest extends \PHPUnit_Framework_TestCase
     public function testThrowsExceptionWhenTempFileAlreadyExists()
     {
         // This factory always creates the same file name...
-        $factory = new MockSysTempFileFactory();
+        $factory = new MockTempFileFactory();
 
         // ...so running it twice here should thrown an exception
         $this->tempFile = $factory->createFile();
