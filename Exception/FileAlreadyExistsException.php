@@ -11,7 +11,7 @@ class FileAlreadyExistsException extends \Exception
     /**
      * Factory function to format message
      *
-     * @param string $path
+     * @param  string $path
      * @return self
      */
     public static function create($path)

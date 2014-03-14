@@ -14,7 +14,7 @@ interface DumperFactory
     /**
      * Creates a dumper for use only by the given container
      *
-     * @param  string $type
+     * @param  string           $type
      * @param  ContainerBuilder $container
      * @return DumperInterface
      */

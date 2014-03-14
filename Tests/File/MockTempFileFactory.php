@@ -11,12 +11,12 @@ use Tuck\ConverterBundle\File\SysTempFileFactory;
  *
  * @author Ross Tuck <me@rosstuck.com>
  */
-class MockSysTempFileFactory extends SysTempFileFactory
+class MockTempFileFactory extends SysTempFileFactory
 {
     /**
      * Always returns the same file name (provided the same extension is given)
      *
-     * @param string $extension
+     * @param  string $extension
      * @return string
      */
     protected function generateFilename($extension)
@@ -27,7 +27,7 @@ class MockSysTempFileFactory extends SysTempFileFactory
     /**
      * Make the file name accessible so we can use it in unit tests
      *
-     * @param string $extension
+     * @param  string $extension
      * @return string
      */
     public function getMockFilename($extension)

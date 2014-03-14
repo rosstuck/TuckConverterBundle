@@ -31,7 +31,7 @@ class ConvertCommandTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Helper to create a command
-     * @param array $arguments
+     * @param  array         $arguments
      * @return CommandTester
      */
     protected function executeCommand(array $arguments)
@@ -51,7 +51,7 @@ class ConvertCommandTest extends \PHPUnit_Framework_TestCase
         $commandTester = new CommandTester($command);
         $arguments['command'] = $command->getName();
         $commandTester->execute($arguments);
+
         return $commandTester;
     }
 }
- 

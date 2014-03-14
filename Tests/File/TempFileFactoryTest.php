@@ -5,7 +5,7 @@ namespace Tuck\ConverterBundle\Tests\File;
 use Tuck\ConverterBundle\File\SysTempFileFactory;
 use Tuck\ConverterBundle\File\TempFileFactory;
 
-class TempFileUtilTest extends \PHPUnit_Framework_TestCase
+class TempFileFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var TempFileFactory
@@ -63,4 +63,3 @@ class TempFileUtilTest extends \PHPUnit_Framework_TestCase
         }
     }
 }
- 
