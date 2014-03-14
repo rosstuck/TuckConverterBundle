@@ -2,6 +2,7 @@
 
 namespace Tuck\ConverterBundle\Tests\File;
 
+use Tuck\ConverterBundle\File\SysTempFileFactory;
 use Tuck\ConverterBundle\File\TempFileFactory;
 
 class TempFileUtilTest extends \PHPUnit_Framework_TestCase
@@ -18,7 +19,7 @@ class TempFileUtilTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->tempFileFactory = new TempFileFactory();
+        $this->tempFileFactory = new SysTempFileFactory();
     }
 
     public function testCreatingTempFileWorks()
@@ -48,7 +49,7 @@ class TempFileUtilTest extends \PHPUnit_Framework_TestCase
     public function testThrowsExceptionWhenTempFileAlreadyExists()
     {
         // This factory always creates the same file name...
-        $factory = new MockTempFileFactory();
+        $factory = new MockSysTempFileFactory();
 
         // ...so running it twice here should thrown an exception
         $this->tempFile = $factory->createFile();

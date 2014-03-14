@@ -2,7 +2,7 @@
 
 namespace Tuck\ConverterBundle\Tests\File;
 
-use Tuck\ConverterBundle\File\TempFileFactory;
+use Tuck\ConverterBundle\File\SysTempFileFactory;
 
 /**
  * Always creates a temp file with the same name.
@@ -11,7 +11,7 @@ use Tuck\ConverterBundle\File\TempFileFactory;
  *
  * @author Ross Tuck <me@rosstuck.com>
  */
-class MockTempFileFactory extends TempFileFactory
+class MockSysTempFileFactory extends SysTempFileFactory
 {
     /**
      * Always returns the same file name (provided the same extension is given)

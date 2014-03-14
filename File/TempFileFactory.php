@@ -1,16 +1,12 @@
 <?php
-
 namespace Tuck\ConverterBundle\File;
 
-use Tuck\ConverterBundle\Exception\CouldNotCreateFileException;
-use Tuck\ConverterBundle\Exception\FileAlreadyExistsException;
-
 /**
- * Creates temp files with a nice interface
+ * Creates temp files in the System tmp dir
  *
  * @author Ross Tuck <me@rosstuck.com>
  */
-class TempFileFactory
+interface TempFileFactory
 {
     /**
      * Essentially, an "improved" tempnam().
@@ -24,30 +20,5 @@ class TempFileFactory
      * @param string $extension
      * @return \SplFileObject
      */
-    public function createFile($content = null, $extension = 'tmp')
-    {
-        $filename = $this->generateFilename($extension);
-        if (file_exists($filename)) {
-            throw FileAlreadyExistsException::create($filename);
-        }
-
-        $tempFile = new \SplFileObject($filename, 'x+');
-        if ($content !== null) {
-            $tempFile->fwrite($content);
-            $tempFile->fflush();
-        }
-
-        return $tempFile;
-    }
-
-    /**
-     * Generates a reasonably unique path for a temp file
-     *
-     * @param string $extension
-     * @return string
-     */
-    protected function generateFilename($extension)
-    {
-        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'tuck_converter_bundle_' . uniqid() . '.' . $extension;
-    }
-} 
+    public function createFile($content = null, $extension = 'tmp');
+}

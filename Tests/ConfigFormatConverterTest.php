@@ -3,10 +3,10 @@ namespace Tuck\ConverterBundle\Tests;
 
 use SplFileInfo;
 use Tuck\ConverterBundle\ConfigFormatConverter;
-use Tuck\ConverterBundle\Dumper\DumperFactory;
-use Tuck\ConverterBundle\File\TempFileFactory;
-use Tuck\ConverterBundle\Loader\LoaderFactory;
-use Tuck\ConverterBundle\Tests\File\MockTempFileFactory;
+use Tuck\ConverterBundle\Dumper\StandardDumperFactory;
+use Tuck\ConverterBundle\File\SysTempFileFactory;
+use Tuck\ConverterBundle\Loader\StandardLoaderFactory;
+use Tuck\ConverterBundle\Tests\File\MockSysTempFileFactory;
 
 class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,9 +24,9 @@ class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
     public function setup()
     {
         $this->converter = new ConfigFormatConverter(
-            new LoaderFactory(),
-            new DumperFactory(),
-            new TempFileFactory()
+            new StandardLoaderFactory(),
+            new StandardDumperFactory(),
+            new SysTempFileFactory()
         );
     }
 
@@ -80,8 +80,8 @@ class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
     public function testTempFileIsCleanedUpAfterConversion()
     {
         // Same setup but with a mock temp file factory that shows us the temp file name used
-        $mockTempFileFactory = new MockTempFileFactory();
-        $converter = new ConfigFormatConverter(new LoaderFactory(), new DumperFactory(), $mockTempFileFactory);
+        $mockTempFileFactory = new MockSysTempFileFactory();
+        $converter = new ConfigFormatConverter(new StandardLoaderFactory(), new StandardDumperFactory(), $mockTempFileFactory);
 
         // Make sure the file gets removed, even if the test fails so it doesn't jam the next run
         $this->teardownFiles[] = $mockTempFileFactory->getMockFilename('xml');

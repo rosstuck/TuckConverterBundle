@@ -6,15 +6,16 @@
 
     <parameters>
         <parameter key="tuck_converter.config_format_converter.class">Tuck\ConverterBundle\ConfigFormatConverter</parameter>
-        <parameter key="tuck_converter.dumper.factory.class">Tuck\ConverterBundle\Dumper\DumperFactory</parameter>
-        <parameter key="tuck_converter.loader.factory.class">Tuck\ConverterBundle\Loader\LoaderFactory</parameter>
-        <parameter key="tuck_converter.file.temp_file_factory.class">Tuck\ConverterBundle\File\TempFileFactory</parameter>
+        <parameter key="tuck_converter.dumper.factory.class">Tuck\ConverterBundle\Dumper\StandardDumperFactory</parameter>
+        <parameter key="tuck_converter.loader.factory.class">Tuck\ConverterBundle\Loader\StandardLoaderFactory</parameter>
+        <parameter key="tuck_converter.file.temp_file_factory.class">Tuck\ConverterBundle\File\SysTempFileFactory</parameter>
     </parameters>
 
     <services>
         <service id="tuck_converter.config_format_converter" class="%tuck_converter.config_format_converter.class%">
             <argument type="service" id="tuck_converter.loader.factory" />
             <argument type="service" id="tuck_converter.dumper.factory" />
+            <argument type="service" id="tuck_converter.file.temp_factory" />
         </service>
 
         <service id="tuck_converter.dumper.factory" class="%tuck_converter.dumper.factory.class%">
@@ -23,7 +24,7 @@
         <service id="tuck_converter.loader.factory" class="%tuck_converter.loader.factory.class%">
         </service>
 
-        <service id="tuck_converter.loader.factory" class="%tuck_converter.file.temp_file_factory.class%">
+        <service id="tuck_converter.file.temp_factory" class="%tuck_converter.file.temp_file_factory.class%">
         </service>
 
     </services>
