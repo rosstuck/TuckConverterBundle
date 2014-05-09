@@ -82,7 +82,13 @@ class ConfigFormatConverter
     {
         $tempFile = $this->tempFileFactory->createFile($content, $oldFormat);
 
-        $output = $this->convertFile($tempFile, $newFormat);
+        try {
+            $output = $this->convertFile($tempFile, $newFormat);
+        } catch (\Exception $e) {
+            // Cleanup the temp file, even with a failure
+            unlink($tempFile->getRealPath());
+            throw $e;
+        }
         unlink($tempFile->getRealPath());
 
         return $output;

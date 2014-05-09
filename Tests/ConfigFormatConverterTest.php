@@ -97,6 +97,24 @@ class ConfigFormatConverterTest extends \PHPUnit_Framework_TestCase
         $this->assertFileNotExists($mockTempFileFactory->getMockFilename('xml'));
     }
 
+    public function testTempFileIsCleanedUpEvenWhenConversionFails()
+    {
+        $mockTempFileFactory = new MockTempFileFactory();
+        $converter = new ConfigFormatConverter(new StandardLoaderFactory(), new StandardDumperFactory(), $mockTempFileFactory);
+        $this->teardownFiles[] = $mockTempFileFactory->getMockFilename('xml');
+
+        // Standard string conversion, nothing to note
+        $gotException = false;
+        try {
+            $converter->convertString('i am invalid services markup', 'xml', 'yml');
+        } catch (\Exception $e) {
+            $gotException = true;
+        }
+
+        $this->assertTrue($gotException, 'Exception should be fired for invalid markup');
+        $this->assertFileNotExists($mockTempFileFactory->getMockFilename('xml'));
+    }
+
     protected function tearDown()
     {
         foreach ($this->teardownFiles as $file) {
