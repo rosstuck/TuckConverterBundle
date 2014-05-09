@@ -3,6 +3,8 @@ TuckConverterBundle
 
 Adds the Symfony2 command "container:convert" which converts service config files to other formats
 
+For one-off files, there's also a [hosted Web UI](http://converter.rosstuck.com/) you can use instead of installing this bundle.
+
 What it does
 ------------
 You can specify the file to convert either on the commandline:
