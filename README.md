@@ -25,3 +25,12 @@ TODO
 - Remove a coupling on input for file extension
 - Update the DependencyInjection/*Extension files as well (perhaps with PHP-Parser?)
 - Moar tests
+
+Installation
+----
+
+Run the command below to install via Composer
+
+```shell
+composer require tuck/converter-bundle
+```
