@@ -3,6 +3,7 @@ namespace Tuck\ConverterBundle\Loader;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Tuck\ConverterBundle\Exception\UnknownFormatException;
 
 /**
@@ -26,7 +27,7 @@ class StandardLoaderFactory implements LoaderFactory
      * @param  string           $type      The name of the file type, such as xml, yml or php
      * @param  ContainerBuilder $container
      * @param  string           $path      The path to the *directory* containing the the file
-     * @return mixed
+     * @return LoaderInterface
      */
     public function createFileLoader($type, ContainerBuilder $container, $path)
     {
