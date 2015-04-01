@@ -76,6 +76,9 @@ class ConfigFormatConverter
      * @param  string $content
      * @param  string $oldFormat
      * @param  string $newFormat
+     *
+     * @throws \Exception when file conversion fails
+     *
      * @return string
      */
     public function convertString($content, $oldFormat, $newFormat)
